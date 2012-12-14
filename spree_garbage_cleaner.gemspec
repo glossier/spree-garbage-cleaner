@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_garbage_cleaner'
-  s.version     = '1.1.3'
+  s.version     = '1.1.4'
   s.summary     = 'A little gem that helps you cleanup old, unneeded data from a Spree database.'
   s.description = """
       This spree extensions will help you cleanup old and useless data gathered by spree while you use it,
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 1.1.3'
+  s.add_dependency 'spree_core', '~> 1.1.4'
   s.add_dependency 'spree_auth', '~> 1.1.3'
 
   s.add_development_dependency 'capybara', '1.0.1'
