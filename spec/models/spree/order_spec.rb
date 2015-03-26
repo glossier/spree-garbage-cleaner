@@ -23,27 +23,27 @@ describe Spree::Order do
 
   context "instance methods" do
     it "has a method that tells if order is garbage" do
-      order = create.build(:order)
+      order = build(:order)
       order.should respond_to(:garbage?)
     end
 
     it "is garbage if not completed and past cleanup_days_interval" do
-      order = create.build(:order, :created_at => ordered_on.days.ago, :completed_at => nil)
+      order = build(:order, :created_at => ordered_on.days.ago, :completed_at => nil)
       order.garbage?.should be_true
     end
 
     it "is not garbage if not completed and not past cleanup_days_interval" do
-      order = create.build(:order, :created_at => (ordered_on-1).days.ago, :completed_at => nil)
+      order = build(:order, :created_at => (ordered_on-1).days.ago, :completed_at => nil)
       order.garbage?.should be_false
     end
 
     it "is not garbage if completed and past cleanup_days_interval" do
-      order = create.build(:order, :created_at => ordered_on.days.ago, :completed_at => Time.now)
+      order = build(:order, :created_at => ordered_on.days.ago, :completed_at => Time.now)
       order.garbage?.should be_false
     end
 
     it "is not garbage if completed and not past cleanup_days_interval" do
-      order = create.build(:order, :completed_at => Time.now)
+      order = build(:order, :completed_at => Time.now)
       order.garbage?.should be_false
     end
   end
