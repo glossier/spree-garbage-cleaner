@@ -13,42 +13,42 @@ describe Spree::Order do
     end
 
     it 'has a garbage finder method' do
-      Spree::Order.garbage.should == [@order_one, @order_two]
+      expect(Spree::Order.garbage).to eq [@order_one, @order_two]
     end
 
     it 'has a method to destroy garbage' do
-      Spree::Order.destroy_garbage.should == [@order_one, @order_two]
-      Spree::Order.garbage.count.should == 0
-      Spree::Order.all.should include(@order_three)
+      expect(Spree::Order.destroy_garbage).to eq [@order_one, @order_two]
+      expect(Spree::Order.garbage.count).to eq 0
+      expect(Spree::Order.all).to include(@order_three)
     end
   end
 
   context 'instance methods' do
     it 'has a method that tells if order is garbage' do
       order = build(:order)
-      order.should respond_to(:garbage?)
+      expect(order).to respond_to(:garbage?)
     end
 
     it 'is garbage if not completed and past cleanup_days_interval' do
       order = build(:order, created_at: ordered_on.days.ago, completed_at: nil)
-      order.garbage?.should be_truthy
+      expect(order.garbage?).to be_truthy
     end
 
     it 'is not garbage if not completed and not past cleanup_days_interval' do
       order = build(:order, created_at: (ordered_on - 1).days.ago,
                             completed_at: nil)
-      order.garbage?.should be_falsey
+      expect(order.garbage?).to be_falsey
     end
 
     it 'is not garbage if completed and past cleanup_days_interval' do
       order = build(:order, created_at: ordered_on.days.ago,
                             completed_at: Time.now)
-      order.garbage?.should be_falsey
+      expect(order.garbage?).to be_falsey
     end
 
     it 'is not garbage if completed and not past cleanup_days_interval' do
       order = build(:order, completed_at: Time.now)
-      order.garbage?.should be_falsey
+      expect(order.garbage?).to be_falsey
     end
   end
 end
