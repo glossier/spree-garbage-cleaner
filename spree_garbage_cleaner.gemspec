@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 2-4-stable'
+  s.add_development_dependency 'rails', '4.1.9'
   s.add_development_dependency 'capybara', '2.4.4'
   s.add_development_dependency 'factory_girl', '~> 4.5'
   s.add_development_dependency 'ffaker'
