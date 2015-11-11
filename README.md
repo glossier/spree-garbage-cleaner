@@ -59,6 +59,16 @@ To change this default value you can run from the rails console:
 Spree::GarbageCleaner::Config.set(:cleanup_days_interval, 10)
 ```
 
+## Configure the timestamp column to be used
+
+By default, an item is flagged as garbage if the `created_at` date is older than
+the interval. This can be changed to use `updated_at` (or any other datetime
+field) by setting the config variable:
+
+```ruby
+Spree::GarbageCleaner::Config.set(:timestamp_column, 'updated_at')
+```
+
 ## Setup a cronjob to cleanup garbage
 
 You can setup a cronjob that periodically runs the cleanup rake task for you. Just add the `whenever` gem to your Gemfile and this to your `config/schedule.rb`:

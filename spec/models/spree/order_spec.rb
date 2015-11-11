@@ -50,6 +50,28 @@ describe Spree::Order do
       order = build(:order, completed_at: Time.now)
       expect(order.garbage?).to be_falsey
     end
+
+    context 'using another timestamp column' do
+      before do
+        Spree::GarbageCleaner::Config.set(:timestamp_column, 'updated_at')
+      end
+
+      after do
+        Spree::GarbageCleaner::Config.set(:timestamp_column, 'created_at')
+      end
+
+      it 'is garbage if past cleanup_days_interval' do
+        order = build(:order, created_at: Time.now, completed_at: nil,
+                              updated_at: ordered_on.days.ago)
+        expect(order.garbage?).to be_truthy
+      end
+
+      it 'is not garbage if not past cleanup_days_interval' do
+        order = build(:order, created_at: ordered_on.days.ago,
+                              completed_at: nil, updated_at: Time.now)
+        expect(order.garbage?).to be_falsey
+      end
+    end
   end
 
   context 'associated objects' do
