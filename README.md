@@ -1,6 +1,6 @@
 ## SpreeGarbageCleaner
 
-[![Build Status](https://secure.travis-ci.org/nebulab/spree-garbage-cleaner.png?branch=master)](http://travis-ci.org/nebulab/spree-garbage-cleaner) 
+[![Build Status](https://secure.travis-ci.org/nebulab/spree-garbage-cleaner.png?branch=master)](http://travis-ci.org/nebulab/spree-garbage-cleaner)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/nebulab/spree-garbage-cleaner)
 
 This extension cleans your Spree database from unneeded data.
@@ -13,7 +13,7 @@ When your website grows, it could be useful to delete these old records to impro
 #### Incomplete orders
 
 By default incomplete orders are kept even if they are not completed.
-This extension searches for incomplete orders and deletes them and their 
+This extension searches for incomplete orders and deletes them and their
 dependent association instances:
 
 - line items
@@ -21,12 +21,6 @@ dependent association instances:
 - shipments
 - return authorizations
 - adjustments
-
-#### Anonymous users
-
-When (not logged in) users begin to add items to cart, an anonymous user is
-created and associated to the new order. This extension deletes all old
-anonymous users that have never completed orders.
 
 ## Installation
 
@@ -58,11 +52,21 @@ rake db:garbage:cleanup
 
 ## Configure the number of days after which records are considered garbage
 
-For each model that collects garbage records you can choose after how many days those records are marked as garbage. Default value is 7 (one week). 
+For each model that collects garbage records you can choose after how many days those records are marked as garbage. Default value is 7 (one week).
 To change this default value you can run from the rails console:
 
 ```ruby
 Spree::GarbageCleaner::Config.set(:cleanup_days_interval, 10)
+```
+
+## Configure the timestamp column to be used
+
+By default, an item is flagged as garbage if the `created_at` date is older than
+the interval. This can be changed to use `updated_at` (or any other datetime
+field) by setting the config variable:
+
+```ruby
+Spree::GarbageCleaner::Config.set(:timestamp_column, 'updated_at')
 ```
 
 ## Setup a cronjob to cleanup garbage

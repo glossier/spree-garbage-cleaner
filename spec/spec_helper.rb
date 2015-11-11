@@ -11,8 +11,8 @@ require 'ffaker'
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
 # Requires factories defined in spree_core
-require 'spree/core/testing_support/factories'
-require 'spree/core/url_helpers'
+require 'spree/testing_support/factories'
+require 'spree/testing_support/url_helpers'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -23,7 +23,7 @@ RSpec.configure do |config|
   #
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
-  config.include Spree::Core::UrlHelpers
+  config.include Spree::TestingSupport::UrlHelpers
 
   # == Mock Framework
   #
@@ -41,4 +41,5 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  config.infer_spec_type_from_file_location!
 end
