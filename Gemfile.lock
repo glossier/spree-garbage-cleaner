@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     spree_garbage_cleaner (1.1.4)
-      byebug
       spree_core (~> 2.pre.4.pre.stable)
 
 GEM
@@ -52,7 +51,6 @@ GEM
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
     builder (3.2.2)
-    byebug (8.1.0)
     camertron-eprun (1.1.0)
     cancancan (1.9.2)
     capybara (2.4.4)
