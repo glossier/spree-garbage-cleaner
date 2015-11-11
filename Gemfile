@@ -1,5 +1,2 @@
-source 'http://rubygems.org'
-
-gem 'byebug'
-
+source 'https://rubygems.org'
 gemspec
