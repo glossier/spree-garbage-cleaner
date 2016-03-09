@@ -18,9 +18,12 @@ describe Spree::Order do
 
     context ".destroy_garbage" do
       it "has a method to destroy garbage" do
-        Spree::Order.destroy_garbage.should == [@order_one, @order_two]
+        Spree::Order.destroy_garbage.should == {
+          destroyed: [@order_one, @order_two],
+          errors: []
+        }
         Spree::Order.garbage.count.should == 0
-        Spree::Order.all.should include(@order_three)
+        Spree::Order.all.should eq([@order_three])
       end
 
       it "destroys garbage in batches" do
