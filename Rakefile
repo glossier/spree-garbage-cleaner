@@ -5,7 +5,7 @@ require 'rubygems/package_task'
 require 'rspec/core/rake_task'
 require 'spree/testing_support/common_rake'
 
-RSpec::Core::RakeTask.new
+RSpec::Core::RakeTask.new(:spec)
 
 task :default => [:spec]
 
