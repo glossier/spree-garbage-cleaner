@@ -19,13 +19,12 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2-4-stable'
-  s.add_development_dependency 'rails', '4.1.9'
+  s.add_dependency 'solidus_core', '~> 1.1'
+  s.add_development_dependency 'rails'
+  s.add_development_dependency 'rake', '< 11.0'
   s.add_development_dependency 'capybara', '2.4.4'
   s.add_development_dependency 'factory_girl', '~> 4.5'
   s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails',  '~> 2.9'
+  s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'coffee-rails'
 end

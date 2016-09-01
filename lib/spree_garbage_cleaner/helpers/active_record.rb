@@ -8,12 +8,17 @@ module SpreeGarbageCleaner
       module ClassMethods
         def destroy_garbage
           destroyed = []
+          errors = []
 
           self.garbage.find_each(:batch_size => Spree::GarbageCleaner::Config.batch_size) do |r|
-            destroyed << r.destroy
+            begin
+              destroyed << r.destroy
+            rescue => e
+              errors << "Error on ID: #{r.id}, #{e}"
+            end
           end
 
-          destroyed
+          { destroyed: destroyed, errors: errors }
         end
       end
     end
